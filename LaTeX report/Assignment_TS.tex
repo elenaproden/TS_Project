@@ -1,0 +1,39 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{mathpazo}
+\author{Elena, Antonio, Hervégil}
+\title{Assignment for the course \\ \textit{The statistical analysis of time series}}
+\begin{document}
+	\maketitle
+	\newpage
+	\section{Theoretical aspects}
+	\begin{enumerate}
+	\item[[ 1.]] \begin{enumerate}
+			\item[[ 1.1]] Compute the autocovariance function $\gamma_{X} (k) = \text{cov}(X_t,X_{t+k})$ for $k=0,1,\dots$ Is {\fontfamily{qzc} \selectfont \large  x} stationary? Do we need a restriction on $\theta$?
+			\item[[ 1.2]] Use the definition of Fourier transform of $\gamma_X$ and derive the expression of the spectral density, $f_X(\lambda)$, $\lambda \in \left[-1/2,1/2\right]$.
+			\end{enumerate}
+	
+	\item[[ 2.]]  \begin{enumerate}
+		\item[[ 2.1]] Compute the autocovariance function $\lambda_Y(k) = \text{cov}(Y_t,Y_{t+k})$ for $k=0,1,\dots$
+		\item[[ 2.2]] Use the definition of Fourier transform $\lambda_Y$ and derive the expression of the spectral density $f_Y(\lambda)$, $\lambda \in \left[-1/2,1/2\right]$
+		\end{enumerate}
+	
+	\item[[ 3.]]  \begin{enumerate}
+		\item[[ 3.1]] Derive the expression for joint autocovariance function $\lambda_{WY}(k) = \text{cov}(W_{t+k},Y_t)$.
+		\item[[ 3.2]] Derive the expression of the cross-spectrum
+		\item[[ 3.3]] Let $f_W$ be the spectral density of the white noise process. Making use of the result in point 3.2, rearrange the terms and express $f_{WY}(\lambda).$ and provide the form of the term $|A_{WY}(\lambda)|^2$
+		\end{enumerate}
+	\item[[ 4.]] \begin{enumerate}
+		\item[[ 4.1]] Show $\gamma_S(k)$
+		\item[[ 4.1]] Proof
+		\end{enumerate}
+	\end{enumerate}
+	\section{Numerical exercises}
+	Please see \textit{Assignment\_TS.rmd} for the analysis (code and comments).
+\end{document}
