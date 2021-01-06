@@ -15,15 +15,16 @@ library(tsDyn)#setar
 library(stats)
 library(latex2exp)
 
-setwd("E:/Universite de Genève/Faculté d'économie/Mon Master en statistique/A1S1/The Statistical Analysis of Time Series/TS_Project")
+# setwd("E:/Universite de Gen?ve/Facult? d'?conomie/Mon Master en statistique/A1S1/The Statistical Analysis of Time Series/TS_Project")
 set.seed(19920913)
 
 # [5. ] -------------------------------------------------------------------
 
 theta=2
 X=rep(0,2000);
+W=arima.sim(n=2000,list())
 for (i in 2:2000){
-  X[i]=arima.sim(n=1,list()) + X[i-1]/theta
+  X[i]=W[i] + W[i-1]/theta
 }
 X=ts(X)
 plot(ts(X))
