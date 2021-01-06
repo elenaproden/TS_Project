@@ -36,14 +36,14 @@ theta_est = Y$coef[1]
 
 # [7. ] -------------------------------------------------------------------
 
-autocov = function(k,theta){
+autocov = function(k,theta,sigma){
   ans=rep(0,length(k))
   for (i in length(k)){
     if (k[i]==0){
-      ans[i]=(1+1/theta^2)
+      ans[i]=sigma*(1+1/theta^2)
     }
     else if (k[i]==1 || k[i]==-1){
-      ans[i]=(1/theta)
+      ans[i]=sigma*(1/theta)
     }
     else{
       ans[i]=0
@@ -54,18 +54,18 @@ autocov = function(k,theta){
 }
 
 theta=2
-plot(c(0.02,0.02),c(0,autocov(0,theta)),type="l",xlim=c(0,2),ylim=c(0,2),xaxt="n",lwd=3,
+plot(c(0.02,0.02),c(0,autocov(0,theta,1)),type="l",xlim=c(0,2),ylim=c(0,2),xaxt="n",lwd=3,
      main="Series X",xlab="Lag",ylab="ACF")
 axis(1,at=seq(0,2,by=1))
-lines(c(1.02,1.02),c(0,autocov(1,theta)),lwd=3)
+lines(c(1.02,1.02),c(0,autocov(1,theta,1)),lwd=3)
 
 theta=1.5
-lines(c(0,0),c(0,autocov(0,theta)),col="red",lwd=3)
-lines(c(1,1),c(0,autocov(1,theta)),col="red",lwd=3)
+lines(c(0,0),c(0,autocov(0,theta,1)),col="red",lwd=3)
+lines(c(1,1),c(0,autocov(1,theta,1)),col="red",lwd=3)
 
 
-lines(c(0.04,0.04),c(0,autocov(0,1/theta_est)),col="blue",lwd=3)
-lines(c(1.04,1.04),c(0,autocov(1,1/theta_est)),col="blue",lwd=3)
+lines(c(0.04,0.04),c(0,autocov(0,1/theta_est,1)),col="blue",lwd=3)
+lines(c(1.04,1.04),c(0,autocov(1,1/theta_est,1)),col="blue",lwd=3)
 
 legend(1.71,2,legend=c(TeX('$\\theta = 1.5$'),TeX('$\\theta = 2$'),TeX('$\\hat{\\theta} \\approx 2.5 $')),fill=c("red","black","blue"))
 
