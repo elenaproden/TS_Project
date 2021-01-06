@@ -32,7 +32,7 @@ plot(ts(X))
 
 Y=stats::arima(X,order=c(0,0,1),method="CSS")
 summary(Y)
-theta_est = Y$coef[1]
+theta_est = 1/Y$coef[1]
 
 # [7. ] -------------------------------------------------------------------
 
@@ -64,8 +64,8 @@ lines(c(0,0),c(0,autocov(0,theta,1)),col="red",lwd=3)
 lines(c(1,1),c(0,autocov(1,theta,1)),col="red",lwd=3)
 
 
-lines(c(0.04,0.04),c(0,autocov(0,1/theta_est,1)),col="blue",lwd=3)
-lines(c(1.04,1.04),c(0,autocov(1,1/theta_est,1)),col="blue",lwd=3)
+lines(c(0.04,0.04),c(0,autocov(0,theta_est,1)),col="blue",lwd=3)
+lines(c(1.04,1.04),c(0,autocov(1,theta_est,1)),col="blue",lwd=3)
 
 legend(1.71,2,legend=c(TeX('$\\theta = 1.5$'),TeX('$\\theta = 2$'),TeX('$\\hat{\\theta} \\approx 2.5 $')),fill=c("red","black","blue"))
 
