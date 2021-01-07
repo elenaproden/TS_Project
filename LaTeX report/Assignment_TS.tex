@@ -15,17 +15,77 @@
 	\section{Theoretical aspects}
 	\begin{enumerate}
 	\item[[ 1.]] \begin{enumerate}
-			\item[[ 1.1]] Compute the autocovariance function $\gamma_{X} (k) = \text{cov}(X_t,X_{t+k})$ for $k=0,1,\dots$ Is {\fontfamily{qzc} \selectfont \large  x} stationary? Do we need a restriction on $\theta$?
+			\item[[ 1.1]] Compute the autocovariance function $\gamma_{X} (k) = \text{cov}(X_t,X_{t+k})$ for $k=0,1,\dots$ Is {\fontfamily{qzc} \selectfont \large  x } stationary? Do we need a restriction on $\theta$?
+			
+			\begin{align*}
+				\gamma_{X}(k) &= \text{cov}(X_t,X_{t+k}) \\
+				&= \text{E}((W_t+\frac{1}{\theta} W_{t-1})(W_{t+k}+\frac{1}{\theta}W_{t+k-1})) - \text{E}(W_t+\frac{1}{\theta} W_{t-1})\text{E}(W_{t+k}+\frac{1}{\theta}W_{t+k-1}) \\
+				&= \text{E}((W_t+\frac{1}{\theta} W_{t-1})(W_{t+k}+\frac{1}{\theta}W_{t+k-1})) \\
+				&= \text{E}(W_tW_{t+k} + \frac{1}{\theta} W_tW_{t+k-1}+\frac{1}{\theta} W_{t-1}W_{t+k} + \frac{1}{\theta^2} W_{t-1}W_{t+k-1}) \\
+				&= 	\left\{
+							\begin{array}{ll}
+								\sigma^2_{W} (1+\frac{1}{\theta^2}) & h=0\\
+								\frac{\sigma^2_{W}}{\theta} & |h|=1\\
+								0 & \text{else}
+							\end{array}
+					\right.			
+			\end{align*}		
+			$\Rightarrow X_{t}$ is weakly stationary. No conditions for $\frac{1}{\theta}$ necessary to get stationarity on MA(q) processes. 
+			
+			
+			
 			\item[[ 1.2]] Use the definition of Fourier transform of $\gamma_X$ and derive the expression of the spectral density, $f_X(\lambda)$, $\lambda \in \left[-1/2,1/2\right]$.
+			
+			\begin{align*}
+				f_X{\lambda} &= \sum_{k=-\infty}^{\infty} \gamma_{X}(k) \text{exp}(-2\pi i \lambda k) \\
+				&= \sum_{k=-2}^{-\infty} \gamma_{X}(k) \text{exp}(-2\pi i \lambda k) + \gamma_{X}(-1) \text{exp}(-2\pi i \lambda \cdot (-1)) \\
+				&+ \gamma_{X}(0) \text{exp}(-2\pi i \lambda \cdot 0) + \gamma_{X}(1) \text{exp}(-2\pi i \lambda \cdot 1) + \sum_{k=2}^{\infty} \gamma_{X}(k) \text{exp}(-2\pi i \lambda k) \\
+				&=  \sigma_{W}^2 \left( \frac{\theta (\text{exp}(2\pi i \lambda) + \text{exp}(-2\pi i \lambda) ) + \theta^2 + 1}{\theta^2}\right) \\
+				&=\sigma_{W}^2 \left( \frac{\theta (\text{cos}(2\pi  \lambda) + i\text{sin}(2\pi  \lambda) + \text{cos}(2\pi \lambda) - i\text{sin}(2\pi \lambda)) + \theta^2 + 1}{\theta^2}\right) \\
+				&= \frac{\sigma_{W}^2}{\theta^2}(2\theta \text{cos}(2 \pi \lambda)+\theta^2 +1)
+			\end{align*}
+			
 			\end{enumerate}
 	
 	\item[[ 2.]]  \begin{enumerate}
 		\item[[ 2.1]] Compute the autocovariance function $\lambda_Y(k) = \text{cov}(Y_t,Y_{t+k})$ for $k=0,1,\dots$
+		\begin{align*}
+			\gamma_{Y}(k) &= \text{cov}(Y_t, Y_{t+k}) \\
+			&= \text{E}((\frac{1}{3}W_{t-1} + \frac{1}{3}W_t + \frac{1}{3}W_{t+1})((\frac{1}{3}W_{t+k-1} + \frac{1}{3}W_{t+k}  + \frac{1}{3}W_{t+k+1}))) \\
+			&=  	\left\{
+					\begin{array}{ll}
+						\frac{\sigma_{W}^2}{3} & h=0\\
+						\frac{2 \sigma_{W}^2}{9} & |h| = 1\\
+						\frac{\sigma_{W}^2}{9} & |h| = 2 \\
+						0 & \text{else}
+					\end{array}
+					\right.	
+		\end{align*}
+		
 		\item[[ 2.2]] Use the definition of Fourier transform $\lambda_Y$ and derive the expression of the spectral density $f_Y(\lambda)$, $\lambda \in \left[-1/2,1/2\right]$
+		\begin{align*}
+			f_Y(\lambda) &= \sum_{k=-\infty}^{\infty} \gamma_{X}(k) \text{exp}(-2\pi i \lambda k) \\
+			&= \gamma_Y(-2) \text{exp}(4\pi i \lambda) + \gamma_Y(-1) \text{exp}(2\pi i \lambda) + \gamma_Y(0) \\
+			&= + \gamma_Y(1) \text{exp}(\pi i \lambda) + \gamma_Y(2) \text{exp}(-4\pi i \lambda) \\
+			&= \sigma_{W}^2 \left( \frac{\text{exp}(4\pi i \lambda) + \text{exp}(-4\pi i \lambda) + 2 \text{exp}(2\pi i \lambda) + 2 \text{exp}(-2\pi i \lambda) + 3 }{9}\right) \\
+			&= \sigma_{W}^2 \left( \frac{2 \text{cos}(4\pi \lambda) + 4 \text{cos}(2\pi \lambda) + 3 }{9}\right)
+		\end{align*}
+		
 		\end{enumerate}
 	
 	\item[[ 3.]]  \begin{enumerate}
 		\item[[ 3.1]] Derive the expression for joint autocovariance function $\lambda_{WY}(k) = \text{cov}(W_{t+k},Y_t)$.
+		\begin{align*}
+			\gamma_{WY}(k) &= \text{cov}(W_{t+k},Y_t) \\
+			&= \text{E}(W_{t+k}(\frac{1}{3}(W_{t-1}+W_{t}+W_{t+1}))) \\
+			&= \frac{1}{3} \text{E}(W_{t+k}W_{t-1}+W_{t+k}W_{t}+W_{t+k}W_{t+1}) \\
+			&=  	\left\{
+			\begin{array}{ll}
+				\frac{\sigma_{W}^2}{3} & h=0 \text{  or  } |h| = 1\\
+				0 & \text{else}
+			\end{array}
+			\right.
+		\end{align*}
 		\item[[ 3.2]] Derive the expression of the cross-spectrum
 		\item[[ 3.3]] Let $f_W$ be the spectral density of the white noise process. Making use of the result in point 3.2, rearrange the terms and express $f_{WY}(\lambda).$ and provide the form of the term $|A_{WY}(\lambda)|^2$
 		\end{enumerate}
