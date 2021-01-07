@@ -41,10 +41,10 @@ autocov = function(k,theta,sigma){
   ans=rep(0,length(k))
   for (i in length(k)){
     if (k[i]==0){
-      ans[i]=sigma*(1+1/theta^2)
+      ans[i]=sigma^2*(1+1/theta^2)
     }
     else if (k[i]==1 || k[i]==-1){
-      ans[i]=sigma*(1/theta)
+      ans[i]=sigma^2*(1/theta)
     }
     else{
       ans[i]=0
