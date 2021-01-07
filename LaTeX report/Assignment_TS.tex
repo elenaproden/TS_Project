@@ -64,7 +64,7 @@
 		
 		\item[[ 2.2]] Use the definition of Fourier transform $\lambda_Y$ and derive the expression of the spectral density $f_Y(\lambda)$, $\lambda \in \left[-1/2,1/2\right]$
 		\begin{align*}
-			f_Y(\lambda) &= \sum_{k=-\infty}^{\infty} \gamma_{X}(k) \text{exp}(-2\pi i \lambda k) \\
+			f_Y(\lambda) &= \sum_{k=-\infty}^{\infty} \gamma_{Y}(k) \text{exp}(-2\pi i \lambda k) \\
 			&= \gamma_Y(-2) \text{exp}(4\pi i \lambda) + \gamma_Y(-1) \text{exp}(2\pi i \lambda) + \gamma_Y(0) \\
 			&= + \gamma_Y(1) \text{exp}(\pi i \lambda) + \gamma_Y(2) \text{exp}(-4\pi i \lambda) \\
 			&= \sigma_{W}^2 \left( \frac{\text{exp}(4\pi i \lambda) + \text{exp}(-4\pi i \lambda) + 2 \text{exp}(2\pi i \lambda) + 2 \text{exp}(-2\pi i \lambda) + 3 }{9}\right) \\
@@ -87,11 +87,46 @@
 			\right.
 		\end{align*}
 		\item[[ 3.2]] Derive the expression of the cross-spectrum
+		\begin{align*}
+			f_WY(\lambda) &= \sum_{k=-\infty}^{\infty} \gamma_{WY}(k) \text{exp}(-2\pi i \lambda k) \\
+			&= \gamma_WY(-1) \text{exp}(2\pi i \lambda) + \gamma_WY(0) \\ &= + \gamma_WY(1) \text{exp}(\pi i \lambda) \\
+			&= \sigma_{W}^2 \left( \frac{\text{exp}(2\pi i \lambda) + \text{exp}(-2\pi i \lambda) + 1}{3}\right) \\
+			&= \sigma_{W}^2 \left( \frac{\text{cos}(2\pi \lambda) + i\text{sin}(2\pi \lambda) +\text{cos}(-2\pi \lambda) + i\text{sin}(-2\pi \lambda) + 1}{3}\right) \\
+			&= \sigma_{W}^2 \left( \frac{2\text{cos}(2\pi \lambda) + 1}{3}\right)
 		\item[[ 3.3]] Let $f_W$ be the spectral density of the white noise process. Making use of the result in point 3.2, rearrange the terms and express $f_{WY}(\lambda).$ and provide the form of the term $|A_{WY}(\lambda)|^2$
+		\begin{align*}
+			f_W(\lambda) &= \sum_{k=-\infty}^{\infty} \gamma_{W}(k) \text{exp}(-2\pi i \lambda k) &= \gamma_{W}(k) &= \sigma_{W}^2\\
+			f_WY(\lambda) &= \sigma_{W}^2 \left( \sum_{k=-1}^{1}(\frac{1}{sqrt(3)}\text{exp}(2\pi i \lambda))^2\right) \\
+			&= \sigma_{W}^2 |A_WY(\lambda)|^2 \\
+			|A_WY(\lambda)|^2 &= \sigma_{W}^2 \left( \sum_{k=-1}^{1}(\frac{1}{sqrt(3)}\text{exp}(2\pi i \lambda))^2\right) \\
 		\end{enumerate}
-	\item[[ 4.]] \begin{enumerate}
-		\item[[ 4.1]] Show $\gamma_S(k)$
-		\item[[ 4.1]] Proof
+	\item[[ 4.]] Prove that $f_S(\lambda) &= |A_SQ(\lambda)|^2 f_Q(\lambda)$ with $A_SQ(\lambda) &= \sum_{j=-\infty}^{\infty}a_j \text{exp}(-2\pi i \lambda j)$
+	\begin{enumerate}
+		\item[[ 4.1]] Show that 
+		\begin{align*}
+			\gamma_{S}(k) &= \text{cov}(S_{t+k},S_t) \\
+			&= \text{E}(\sum_{j=-\infty}^{\infty}a_j Q_t+k-j * \sum_{j=-\infty}^{\infty}a_j Q_t-j ) \\
+			&= \text{E}((...a_-1 Q_t+k+1 + a_0 Q_t+k + a_1 Q_t+k-1 ...)*(...a_-1 Q_t+1 + a_0 Q_t + a_1 Q_t-1 ...) \\
+			&= ... \text{E}(a_-1 Q_t+k+1 a_-1 Q_t+1) + \text{E}(a_-1 Q_t+k+1 a_0 Q_t) + \text{E}(a_-1 Q_t+k+1 a_1 Q_t-1)... \\
+			&= \text{E}(\sum_{r} \sum_{s} \a_s Q_t+k-r a_r Q_t-s) &= \text{E}(\sum_{r} \sum_{s} \a_r a_s Q_t+k-r Q_t-s) \\
+			&= \sum_{r} \sum_{s} \a_r a_s \text{E}(Q_t+k-r Q_t-s) &= \\sum_{r} \sum_{s} \a_r a_s \gamma_Q (k-r+s) \\
+			&= \sum_{r} \sum_{s} \a_r a_s (\int_{-1/2}^{1/2} \text{exp}(2\pi i \lambda (k-r+s)) f_Q(\lambda) d\lambda ) \\
+			\text{exp}(-2\pi i \lambda k)
+		\item[[ 4.2]] Prove that
+		\begin{align*}
+			|A_SQ(\lambda)|^2 &= |\sum_{j=-\infty}^{\infty}a_j \text{exp}(-2\pi i \lambda j)|^2 \\
+			&= \sum_{r} \sum_{s} a_r a_s  \text{exp}(-2\pi i \lambda r) \text{exp}(2\pi i \lambda s) \\
+			&= \sum_{r} a_r \text{exp}(-2\pi i \lambda r) \sum_{s} a_s \text{exp}(2\pi i \lambda s) \\
+			
+			\gamma_{S}(k) &= \sum_{r} \sum_{s} \a_r a_s (\int_{-1/2}^{1/2} \text{exp}(2\pi i \lambda (k-r+s)) f_Q(\lambda) )
+			&= \sum_{r} \sum_{s} a_r a_s  (\int_{-1/2}^{1/2} \text{exp}(2\pi i \lambda k) \text{exp}(-2\pi i \lambda r) \text{exp}(2\pi i \lambda s) f_Q(\lambda) ) \\
+			&= \int_{-1/2}^{1/2} \sum_{r} a_r \text{exp}(-2\pi i \lambda r) \sum_{s} a_s \text{exp}(2\pi i \lambda s) \text{exp}(2\pi i \lambda k) f_Q(\lambda) \\
+			&= \int_{-1/2}^{1/2} |A_SQ(\lambda)|^2 \text{exp}(2\pi i \lambda k) f_Q(\lambda) \\
+			
+			$By definition$ \gamma_{S}(k) &= \int_{-1/2}^{1/2} \text{exp}(2\pi i \lambda k) f_S(\lambda) d\lambda
+			$Then$ \int_{-1/2}^{1/2} \text{exp}(2\pi i \lambda k) f_S(\lambda) d\lambda &= \int_{-1/2}^{1/2} |A_SQ(\lambda)|^2 \text{exp}(2\pi i \lambda k) f_Q(\lambda)\\
+			f_S(\lambda) = |A_SQ(\lambda)|^2 \frac{\text{exp}(2\pi \lambda k)}{\text{exp}(2\pi \lambda k} f_Q(\lambda) \\
+			|A_SQ(\lambda)|^2 f_Q(\lambda)
 		\end{enumerate}
 	\end{enumerate}
 	\section{Numerical exercises}
